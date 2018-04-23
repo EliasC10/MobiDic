@@ -1,0 +1,2 @@
+class ClientEntry < ApplicationRecord
+end
