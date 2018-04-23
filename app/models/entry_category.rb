@@ -1,0 +1,2 @@
+class EntryCategory < ApplicationRecord
+end
