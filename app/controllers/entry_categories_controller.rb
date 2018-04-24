@@ -1,6 +1,6 @@
 class EntryCategoriesController < ApplicationController
   before_action :set_entry_category, only: [:show, :update, :destroy]
-
+  before_action :authenticate_request!
   # GET /entry_categories
   def index
     @entry_categories = EntryCategory.all

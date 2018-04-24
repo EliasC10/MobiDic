@@ -1,6 +1,6 @@
 class InstitutionsController < ApplicationController
   before_action :set_institution, only: [:show, :update, :destroy]
-
+  before_action :authenticate_request! 
   # GET /institutions
   def index
     @institutions = Institution.all

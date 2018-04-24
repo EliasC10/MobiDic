@@ -1,6 +1,6 @@
 class ClientEntriesController < ApplicationController
   before_action :set_client_entry, only: [:show, :update, :destroy]
-
+  before_action :authenticate_request!
   # GET /client_entries
   def index
     @client_entries = ClientEntry.all

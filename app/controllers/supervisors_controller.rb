@@ -14,14 +14,10 @@ class SupervisorsController < ApplicationController
 
   # GET /supervisors
   def index
-    @supervisors = Supervisor.all
-
-    render json: @supervisors
   end
 
   # GET /supervisors/1
   def show
-    render json: @supervisor
   end
 
   # POST /supervisors
