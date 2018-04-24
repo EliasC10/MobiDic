@@ -5,9 +5,11 @@ class ClientsController < ApplicationController
   def index
      supervisor_id = params[:supervisor_id]
      institution = Institution.find(Supervisor.find(supervisor_id).institution_id)
-     client_list = Client.where(institution_id: institution.id)
-
-    render json: client_list
+     clients = Array.new
+     Client.where(institution_id: institution.id).each do |c|
+       clients.push(c)
+     end
+    render json: {clients: clients}
   end
 
   # GET /clients/1
