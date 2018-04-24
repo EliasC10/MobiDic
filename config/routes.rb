@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   post 'login', to: 'supervisors#login'
   post 'clients', to: 'clients#index'
-  resources :categories
+  post 'categories', to: 'categories#index'
   resources :entry_categories
   resources :entries
   resources :client_entries
