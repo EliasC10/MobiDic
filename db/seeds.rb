@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 Supervisor.delete_all
 Supervisor.reset_pk_sequence
 
@@ -22,8 +24,10 @@ Category.reset_pk_sequence
 Institution.create(name: "Puch Urstein")
 Institution.create(name: "Hallein")
 
-Supervisor.create(name: "Dr. Cle", password: "test", institution_id: 1)
-Supervisor.create(name: "Dr. Mens", password: "test", institution_id: 1)
+#password = BCrypt::Password.create("hunter2")
+
+Supervisor.create(name: "Dr. Cle", password: "test", password_confirmation: "test", institution_id: 1)
+Supervisor.create(name: "Dr. Mens", password: "test", password_confirmation: "test", institution_id: 1)
 
 Client.create(name: "Eli", date_of_birth: "01.01.2018", institution_id: 1)
 Client.create(name: "As", date_of_birth: "01.01.2017", institution_id: 1)

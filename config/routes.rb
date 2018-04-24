@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post 'login', to: 'supervisors#login'
   resources :categories
   resources :entry_categories
   resources :entries
@@ -6,5 +7,6 @@ Rails.application.routes.draw do
   resources :clients
   resources :institutions
   resources :supervisors
- root 'welcome#index'
+  root 'welcome#index'
+
 end

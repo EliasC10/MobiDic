@@ -1,6 +1,17 @@
 class SupervisorsController < ApplicationController
   before_action :set_supervisor, only: [:show, :update, :destroy]
 
+  def login
+    supervisor = Supervisor.find_by(name: params[:name])
+
+    if supervisor && supervisor.authenticate(params[:password])
+        auth_token = JsonWebToken.encode({supervisor: supervisor.name})
+        render json: {auth_token: auth_token}, status: :ok
+    else
+      render json: {error: 'Invalid username / password'}, status: :unauthorized
+    end
+  end
+
   # GET /supervisors
   def index
     @supervisors = Supervisor.all
@@ -46,6 +57,10 @@ class SupervisorsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def supervisor_params
-      params.require(:supervisor).permit(:name, :password, :institution_id)
+      params.require(:supervisor).permit(:name, :password_digest, :institution_id)
     end
+
+
+
+
 end
