@@ -3,9 +3,11 @@ class ClientsController < ApplicationController
   before_action :authenticate_request!
   # GET /clients
   def index
-    @clients = Client.all
+     supervisor_id = params[:supervisor_id]
+     institution = Institution.find(Supervisor.find(supervisor_id).institution_id)
+     client_list = Client.where(institution_id: institution.id)
 
-    render json: @clients
+    render json: client_list
   end
 
   # GET /clients/1
