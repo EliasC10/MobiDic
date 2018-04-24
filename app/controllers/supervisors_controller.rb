@@ -5,7 +5,7 @@ class SupervisorsController < ApplicationController
     supervisor = Supervisor.find_by(name: params[:name])
 
     if supervisor && supervisor.authenticate(params[:password])
-        auth_token = JsonWebToken.encode({supervisor: supervisor.name})
+        auth_token = JsonWebToken.encode({supervisor_id: supervisor.id})
         render json: {auth_token: auth_token}, status: :ok
     else
       render json: {error: 'Invalid username / password'}, status: :unauthorized
