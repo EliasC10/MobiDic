@@ -19,6 +19,7 @@ class EntriesController < ApplicationController
 
     matched_entries.each do |e|
       hash = e.as_json
+      hash['supervisor_name'] = Supervisor.where(id: e.supervisor_id).take.name
 
       hash['category_array'] = Array.new
       entrycategories = EntryCategory.where(entry_id: e.id).to_a
