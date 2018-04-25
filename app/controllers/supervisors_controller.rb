@@ -14,10 +14,12 @@ class SupervisorsController < ApplicationController
 
   # GET /supervisors
   def index
+    render json: {error: 'unauthorized Action'}, status: :unauthorized
   end
 
   # GET /supervisors/1
   def show
+    render json: {error: 'unauthorized Action'}, status: :unauthorized
   end
 
   # POST /supervisors
