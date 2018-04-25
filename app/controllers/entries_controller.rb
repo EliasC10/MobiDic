@@ -40,6 +40,28 @@ class EntriesController < ApplicationController
     render json: {entries: result}
   end
 
+  def new
+    supervisor_id = params[:supervisor_id]
+    timestamp_string = params[:timestamp]
+    timestamp = timestamp_string.to_time
+    text = params[:text]
+    client_array = [:client_array]
+    category_array = [:category_array]
+
+    entry = Entry.create(timestamp: timestamp, text: text, supervisor_id: supervisor_id)
+
+    category_array.each do |c|
+      entry_category = EntryCategory.create(entry_id: entry.id, category_id: c)
+    end
+    client_array.each do |c|
+      client_entry = ClientEntry.create(client_id: c, entry_id: entry.id)
+    end
+    render json: {
+      status: 200,
+      message: "Successfully created entry."
+    }.to_json
+  end
+
   # GET /entries/1
   def show
     render json: @entry
