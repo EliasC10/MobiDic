@@ -3,9 +3,40 @@ class EntriesController < ApplicationController
   before_action :authenticate_request!
   # GET /entries
   def index
-    @entries = Entry.all
+    supervisor_id = params[:supervisor_id]
+    institution = Institution.find(Supervisor.find(supervisor_id).institution_id)
+    all_supervisors = Supervisor.where(institution_id: institution.id).to_a
 
-    render json: @entries
+    matched_entries = Array.new
+    all_supervisors.each do |s|
+      all_entries = Entry.where(supervisor_id: s.id).to_a
+      all_entries.each do |e|
+        matched_entries.push(e)
+      end
+    end
+
+    result = Array.new
+
+    matched_entries.each do |e|
+      hash = e.as_json
+
+      hash['category_array'] = Array.new
+      entrycategories = EntryCategory.where(entry_id: e.id).to_a
+      entrycategories.each do |ec|
+        matched_category = Category.where(id: ec.category_id).take
+        hash['category_array'].push(matched_category)
+      end
+
+      hash['client_array'] = Array.new
+      cliententries = ClientEntry.where(entry_id: e.id).to_a
+      cliententries.each do |ce|
+        matched_client = Client.where(id: ce.client_id).take
+        hash['client_array'].push(matched_client)
+      end
+      result.push(hash)
+    end
+
+    render json: {entries: result}
   end
 
   # GET /entries/1
