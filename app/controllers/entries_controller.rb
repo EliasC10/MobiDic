@@ -49,8 +49,8 @@ class EntriesController < ApplicationController
     category_array = params[:category_array]
     entry = Entry.create(timestamp: timestamp, text: text, supervisor_id: supervisor_id)
 
-    client_array = client_array[0].split(',').map(&:to_i)
-    category_array = category_array[0].split(',').map(&:to_i)
+    client_array = client_array.split(',').map(&:to_i)
+    category_array = category_array.split(',').map(&:to_i)
 
     category_array.each do |c|
       puts c
