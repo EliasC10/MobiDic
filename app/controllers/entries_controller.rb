@@ -9,7 +9,7 @@ class EntriesController < ApplicationController
 
     matched_entries = Array.new
     all_supervisors.each do |s|
-      all_entries = Entry.where(supervisor_id: s.id).to_a
+      all_entries = Entry.where(supervisor_id: s.id).order(timestamp: :desc).to_a
       all_entries.each do |e|
         matched_entries.push(e)
       end
