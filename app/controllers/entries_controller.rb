@@ -53,7 +53,6 @@ class EntriesController < ApplicationController
     category_array = category_array.split(',').map(&:to_i)
 
     category_array.each do |c|
-      puts c
       EntryCategory.create(entry_id: entry.id, category_id: c)
     end
     client_array.each do |c|
