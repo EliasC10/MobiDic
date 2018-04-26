@@ -52,16 +52,33 @@ class EntriesController < ApplicationController
     client_array = client_array.split(',').map(&:to_i)
     category_array = category_array.split(',').map(&:to_i)
 
+    check_entrycategory = true
+    check_cliententry = true
+
     category_array.each do |c|
-      EntryCategory.create(entry_id: entry.id, category_id: c)
+      entry_category = EntryCategory.create(entry_id: entry.id, category_id: c)
+      if !entry_category.save
+        check_entrycategory = false
+      end
     end
     client_array.each do |c|
-      ClientEntry.create(client_id: c, entry_id: entry.id)
+      client_entry = ClientEntry.create(client_id: c, entry_id: entry.id)
+      if !client_entry.save
+        check_entrycategory = false
+      end
     end
-    render json: {
-      status: 200,
-      message: "Successfully created entry."
-    }.to_json
+
+    if entry.save && check_cliententry && check_entrycategory
+      render json: {
+        status: 200,
+        message: "Successfully created entry."
+      }.to_json
+    else
+      render json: {
+        status: 400,
+        message: "Something went wrong."
+      }.to_json
+    end
   end
 
   # GET /entries/1
