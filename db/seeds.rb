@@ -49,8 +49,8 @@ Category.create(name: "Freizeit", flag: "#8AC65A")
 Category.create(name: "Alltagsstruktur", flag: "#8AC65A")
 Category.create(name: "Gesundheit", flag: "#8AC65A")
 
-Category.create(name: "Sozialkontakte", flag: "#AEA4DO")
-Category.create(name: "Familie", flag: "#AEA4DO")
+Category.create(name: "Sozialkontakte", flag: "#AEA4D0")
+Category.create(name: "Familie", flag: "#AEA4D0")
 
 Category.create(name: "Konflikte", flag: "#EF403d")
 Category.create(name: "Emotion", flag: "#EF403d")
