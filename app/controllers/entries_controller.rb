@@ -86,17 +86,6 @@ class EntriesController < ApplicationController
     render json: @entry
   end
 
-  # POST /entries
-  def create
-    @entry = Entry.new(entry_params)
-
-    if @entry.save
-      render json: @entry, status: :created, location: @entry
-    else
-      render json: @entry.errors, status: :unprocessable_entity
-    end
-  end
-
   # PATCH/PUT /entries/1
   def update
     if @entry.update(entry_params)
@@ -106,9 +95,10 @@ class EntriesController < ApplicationController
     end
   end
 
-  # DELETE /entries/1
-  def destroy
-    @entry.destroy
+  # DELETE /entry
+  def delete
+    entry_id = params[:entry_id]
+    Entry.destroy(entry_id)
   end
 
   private
