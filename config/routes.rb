@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   post 'categories', to: 'categories#index'
   post 'entries', to: 'entries#index'
   post 'entries/new', to: 'entries#new'
-  post 'entry/delete', to: 'entries#delete'
+  post 'entries/delete', to: 'entries#delete'
   root 'welcome#index'
 
 end

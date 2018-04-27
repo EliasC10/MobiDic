@@ -98,7 +98,18 @@ class EntriesController < ApplicationController
   # DELETE /entry
   def delete
     entry_id = params[:entry_id]
-    Entry.destroy(entry_id)
+    entry = Entry.destroy(entry_id)
+    if entry.destroyed?
+      render json: {
+        status: 200,
+        message: "Successfully destroyed entry."
+      }.to_json
+    else
+      render json: {
+        status: 400,
+        message: "Something went wrong."
+      }.to_json
+    end
   end
 
   private
