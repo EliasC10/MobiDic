@@ -1,6 +1,6 @@
 class InstitutionsController < ApplicationController
   before_action :set_institution, only: [:show, :update, :destroy]
-  before_action :authenticate_request! 
+  before_action :authenticate_request!
   # GET /institutions
   def index
     @institutions = Institution.all
@@ -16,7 +16,6 @@ class InstitutionsController < ApplicationController
   # POST /institutions
   def create
     @institution = Institution.new(institution_params)
-
     if @institution.save
       render json: @institution, status: :created, location: @institution
     else

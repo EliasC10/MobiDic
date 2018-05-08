@@ -3,7 +3,6 @@ class SupervisorsController < ApplicationController
 
   def login
     supervisor = Supervisor.find_by(name: params[:name])
-
     if supervisor && supervisor.authenticate(params[:password])
         auth_token = JsonWebToken.encode({supervisor_id: supervisor.id})
         render json: {auth_token: auth_token, supervisor_id: supervisor.id, supervisor_name: supervisor.name }, status: :ok
@@ -25,7 +24,6 @@ class SupervisorsController < ApplicationController
   # POST /supervisors
   def create
     @supervisor = Supervisor.new(supervisor_params)
-
     if @supervisor.save
       render json: @supervisor, status: :created, location: @supervisor
     else
@@ -57,8 +55,4 @@ class SupervisorsController < ApplicationController
     def supervisor_params
       params.require(:supervisor).permit(:name, :password_digest, :institution_id)
     end
-
-
-
-
 end
