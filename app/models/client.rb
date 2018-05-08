@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Client < ApplicationRecord
   has_many :client_entries,
-  dependent: :destroy
+           dependent: :destroy
   belongs_to :institution
 end

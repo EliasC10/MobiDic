@@ -1,24 +1,26 @@
+# frozen_string_literal: true
+
 class SupervisorsController < ApplicationController
-  before_action :set_supervisor, only: [:show, :update, :destroy]
+  before_action :set_supervisor, only: %i[show update destroy]
 
   def login
     supervisor = Supervisor.find_by(name: params[:name])
-    if supervisor && supervisor.authenticate(params[:password])
-        auth_token = JsonWebToken.encode({supervisor_id: supervisor.id})
-        render json: {auth_token: auth_token, supervisor_id: supervisor.id, supervisor_name: supervisor.name }, status: :ok
+    if supervisor&.authenticate(params[:password])
+      auth_token = JsonWebToken.encode(supervisor_id: supervisor.id)
+      render json: { auth_token: auth_token, supervisor_id: supervisor.id, supervisor_name: supervisor.name }, status: :ok
     else
-      render json: {error: 'Invalid username / password'}, status: :unauthorized
+      render json: { error: 'Invalid username / password' }, status: :unauthorized
     end
   end
 
   # GET /supervisors
   def index
-    render json: {error: 'unauthorized Action'}, status: :unauthorized
+    render json: { error: 'unauthorized Action' }, status: :unauthorized
   end
 
   # GET /supervisors/1
   def show
-    render json: {error: 'unauthorized Action'}, status: :unauthorized
+    render json: { error: 'unauthorized Action' }, status: :unauthorized
   end
 
   # POST /supervisors
@@ -46,13 +48,14 @@ class SupervisorsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_supervisor
-      @supervisor = Supervisor.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def supervisor_params
-      params.require(:supervisor).permit(:name, :password_digest, :institution_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_supervisor
+    @supervisor = Supervisor.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def supervisor_params
+    params.require(:supervisor).permit(:name, :password_digest, :institution_id)
+  end
 end

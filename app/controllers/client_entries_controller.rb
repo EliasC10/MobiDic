@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ClientEntriesController < ApplicationController
-  before_action :set_client_entry, only: [:show, :update, :destroy]
+  before_action :set_client_entry, only: %i[show update destroy]
   before_action :authenticate_request!
   # GET /client_entries
   def index
@@ -39,13 +41,14 @@ class ClientEntriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_client_entry
-      @client_entry = ClientEntry.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def client_entry_params
-      params.require(:client_entry).permit(:client_id, :entry_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_client_entry
+    @client_entry = ClientEntry.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def client_entry_params
+    params.require(:client_entry).permit(:client_id, :entry_id)
+  end
 end

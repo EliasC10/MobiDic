@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class ClientsControllerTest < ActionDispatch::IntegrationTest
@@ -5,12 +7,12 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
     @client = clients(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get clients_url, as: :json
     assert_response :success
   end
 
-  test "should create client" do
+  test 'should create client' do
     assert_difference('Client.count') do
       post clients_url, params: { client: { date_of_birth: @client.date_of_birth, institution_id: @client.institution_id, name: @client.name } }, as: :json
     end
@@ -18,17 +20,17 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
     assert_response 201
   end
 
-  test "should show client" do
+  test 'should show client' do
     get client_url(@client), as: :json
     assert_response :success
   end
 
-  test "should update client" do
+  test 'should update client' do
     patch client_url(@client), params: { client: { date_of_birth: @client.date_of_birth, institution_id: @client.institution_id, name: @client.name } }, as: :json
     assert_response 200
   end
 
-  test "should destroy client" do
+  test 'should destroy client' do
     assert_difference('Client.count', -1) do
       delete client_url(@client), as: :json
     end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class EntryCategoriesController < ApplicationController
-  before_action :set_entry_category, only: [:show, :update, :destroy]
+  before_action :set_entry_category, only: %i[show update destroy]
   before_action :authenticate_request!
   # GET /entry_categories
   def index
@@ -39,13 +41,14 @@ class EntryCategoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_entry_category
-      @entry_category = EntryCategory.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def entry_category_params
-      params.require(:entry_category).permit(:entry_id, :category_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_entry_category
+    @entry_category = EntryCategory.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def entry_category_params
+    params.require(:entry_category).permit(:entry_id, :category_id)
+  end
 end

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class Entry < ApplicationRecord
   has_many :client_entries,
-  dependent: :destroy
+           dependent: :destroy
   has_many :entry_categories,
-  dependent: :destroy
+           dependent: :destroy
   belongs_to :supervisor
 end
