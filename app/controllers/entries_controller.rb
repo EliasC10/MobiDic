@@ -45,7 +45,7 @@ class EntriesController < ApplicationController
   def new
     supervisor_id = params[:supervisor_id]
     timestamp_string = params[:timestamp]
-    timestamp = timestamp_string.to_time_in_current_zone
+    timestamp = timestamp_string.to_time
     text = params[:text]
     client_array = params[:client_array]
     category_array = params[:category_array]
