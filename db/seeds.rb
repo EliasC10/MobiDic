@@ -5,9 +5,6 @@ require 'bcrypt'
 Supervisor.delete_all
 Supervisor.reset_pk_sequence
 
-Institution.delete_all
-Institution.reset_pk_sequence
-
 Client.delete_all
 Client.reset_pk_sequence
 
@@ -22,6 +19,10 @@ EntryCategory.reset_pk_sequence
 
 Category.delete_all
 Category.reset_pk_sequence
+
+Institution.delete_all
+Institution.reset_pk_sequence
+
 
 Institution.create(name: 'Puch Urstein')
 Institution.create(name: 'Hallein')
