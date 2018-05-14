@@ -2,10 +2,10 @@
 
 one:
   name: MyString
-  password: 
+  password_digest:
   institution_id: 1
 
 two:
   name: MyString
-  password: 
+  password_digest:
   institution_id: 1
