@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddForeignKeyInTables < ActiveRecord::Migration[5.1]
   def change
     add_foreign_key :supervisors, :institutions, column: :institution_id

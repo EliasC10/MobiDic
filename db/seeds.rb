@@ -23,7 +23,6 @@ Category.reset_pk_sequence
 Institution.delete_all
 Institution.reset_pk_sequence
 
-
 Institution.create(name: 'Puch Urstein')
 Institution.create(name: 'Hallein')
 
