@@ -908,33 +908,6 @@ Style/BracesAroundHashParameters:
     # also a hash literal.
     - context_dependent
 
-Style/ClassAndModuleChildren:
-  # Checks the style of children definitions at classes and modules.
-  #
-  # Basically there are two different styles:
-  #
-  # `nested` - have each child on a separate line
-  #   class Foo
-  #     class Bar
-  #     end
-  #   end
-  #
-  # `compact` - combine definitions as much as possible
-  #   class Foo::Bar
-  #   end
-  #
-  # The compact style is only forced, for classes or modules with one child.
-  EnforcedStyle: nested
-  SupportedStyles:
-    - nested
-    - compact
-
-Style/ClassCheck:
-  EnforcedStyle: is_a?
-  SupportedStyles:
-    - is_a?
-    - kind_of?
-
 # Align with the style guide.
 Style/CollectionMethods:
   # Mapping from undesired method to desired_method
@@ -1155,13 +1128,6 @@ Style/MissingElse:
 
 # Checks the grouping of mixins (`include`, `extend`, `prepend`) in `class` and
 # `module` bodies.
-Style/MixinGrouping:
-  EnforcedStyle: separated
-  SupportedStyles:
-    # separated: each mixed in module goes in a separate statement.
-    # grouped: mixed in modules are grouped into a single statement.
-    - separated
-    - grouped
 
 Style/ModuleFunction:
   EnforcedStyle: module_function

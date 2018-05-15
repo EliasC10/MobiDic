@@ -5,9 +5,8 @@ class EntriesController < ApplicationController
   before_action :authenticate_request!
   # GET /entries
   def index
-    supervisor_id = params[:supervisor_id]
-    institution = Institution.find(Supervisor.find(supervisor_id).institution_id)
-    all_supervisors = Supervisor.where(institution_id: institution.id).to_a
+    @supervisor = Supervisor.find(params[:supervisor_id])
+    all_supervisors = @supervisor.colleagues
 
     matched_entries = []
     all_supervisors.each do |s|
@@ -111,7 +110,7 @@ class EntriesController < ApplicationController
   end
 
   def destroy
-    @entry = Entry.destroy(params[:id])
+    @entry.destroy
   end
 
   private

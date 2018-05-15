@@ -5,4 +5,8 @@ class Supervisor < ApplicationRecord
   has_many :entries,
            dependent: :destroy
   belongs_to :institution
+
+  def colleagues
+    Supervisor.where(institution_id: institution_id)
+  end
 end
